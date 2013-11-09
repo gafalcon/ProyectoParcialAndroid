@@ -8,9 +8,50 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/boton_continuar"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_below="@+id/boton_juego_nuevo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/boton_continuar" />
+
+    <Button
+        android:id="@+id/boton_puntuaciones"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/boton_continuar"
+        android:layout_marginTop="25dp"
+        android:text="@string/boton_puntuaciones" />
+
+    <Button
+        android:id="@+id/boton_instrucciones"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/boton_puntuaciones"
+        android:layout_below="@+id/boton_puntuaciones"
+        android:layout_marginTop="25dp"
+        android:text="@string/boton_instrucciones" />
+
+    <Button
+        android:id="@+id/boton_salir"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/boton_instrucciones"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/boton_salir" 
+        android:onClick="salir"/>
+
+    <Button
+        android:id="@+id/boton_juego_nuevo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/boton_juego_nuevo" />
 
 </RelativeLayout>

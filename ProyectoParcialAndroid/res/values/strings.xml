@@ -4,5 +4,10 @@
     <string name="app_name">Buscaminas</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="boton_juego_nuevo">Jugar</string>
+    <string name="boton_continuar">Continuar</string>
+    <string name="boton_puntuaciones">Puntuaciones</string>
+    <string name="boton_instrucciones">Instrucciones</string>
+    <string name="boton_salir">Salir</string>
 
 </resources>
