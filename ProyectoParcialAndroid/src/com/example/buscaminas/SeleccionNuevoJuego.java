@@ -19,7 +19,15 @@ public class SeleccionNuevoJuego extends DialogFragment{
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				
+				switch (which) {
+				case 3:
+					DialogFragment dialogo = new Personalizado();
+					dialogo.show(getFragmentManager(),"Personalizar");
+					break;
+
+				default:
+					break;
+				}
 			}
 		});
 		return builder.create();
