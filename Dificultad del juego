@@ -67,3 +67,17 @@ public class Minesweeper extends Activity implements OnClickListener
       
     }
 }
+
+
+
+//Se necesita un titulo, por lo que en strings.xml definir una nueva cadena llamada difficulty_title. El constructor de diálogo tendrá un conjunto de los elementos que deben mostrarse en la ventana por lo que necesitamos para crear una matriz para mantener los niveles de dificultad, esto se puede hacer ya sea en el código java o como xml separado. Se puede crear un nuevo archivo llamado arrays.xml en res / valores,  aquí está el archivo arrays.xml
+
+
+
+<Resources>
+    <array name="difficulty">
+        <item> @ string / easy_label </ item>
+        <item> @ string / medium_label </ item>
+        <item> @ string / hard_label </ item>
+    </ Array>
+</ Resources>
