@@ -32,18 +32,21 @@
         />
     </TableRow>
     
+	
+		    <ScrollView>
+		        <TableLayout android:id="@+id/campo"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            
+		            android:stretchColumns="*"
+		            android:gravity="bottom"
+		            android:padding="5dp">
+		            
+		        </TableLayout>
+    		</ScrollView>
+		    
 
-        <ScrollView>
-        <TableLayout android:id="@+id/campo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            
-            android:stretchColumns="*"
-            android:gravity="bottom"
-            android:padding="5dp">
-            
-        </TableLayout>
-    	</ScrollView>
+        
         
  
 

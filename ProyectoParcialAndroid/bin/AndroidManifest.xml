@@ -26,6 +26,12 @@
             android:name="com.example.buscaminas.Instrucciones"
             android:label="Como jugar"
             android:theme="@android:style/Theme.Dialog"></activity>
+        <activity 
+            android:name="com.example.buscaminas.JuegoNuevo"
+            android:configChanges="orientation|screenSize"
+            android:label="JuegoNuevo"
+            ></activity>
+        
     </application>
 
 </manifest>
