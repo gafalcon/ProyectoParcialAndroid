@@ -30,10 +30,6 @@ public class MainActivity extends Activity {
 			DialogFragment dialog = new SeleccionNuevoJuego();
 			dialog.show(getFragmentManager(),"SeleccionNuevoJuego");
 			break;
-		case R.id.boton_continuar:
-			break;
-		case R.id.boton_puntuaciones:
-			break;
 		case R.id.boton_instrucciones:
 			Intent intent = new Intent(this,Instrucciones.class);
 			startActivity(intent);

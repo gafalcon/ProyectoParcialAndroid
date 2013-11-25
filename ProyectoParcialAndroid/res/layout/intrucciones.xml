@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="1"
+    android:background="@drawable/instru"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="3"
+        android:shadowDy="2"
+        android:shadowRadius="2.3"
+        android:text="INSTRUCCIONES:"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="top|left"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="El objetivo del juego es limpiar el campo de minas que aparece en pantalla. Al principio parece una tabla cubierta de azulejos. Cuando se hace clic en, un azulejo desaparece y revela lo que hay debajo. El resultado puede ser un cuadrado en blanco, un cuadrado con un número, o en el peor caso, una mina. Si tienes la mala suerte de descubrir la mina, el juego ha terminado. 
+Hay tres niveles de dificultad en el juego."
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

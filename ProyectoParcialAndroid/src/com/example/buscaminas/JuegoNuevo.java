@@ -1,6 +1,10 @@
 package com.example.buscaminas;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
 import java.util.Random;
 
 public class JuegoNuevo extends Activity {
@@ -26,6 +31,19 @@ public class JuegoNuevo extends Activity {
 	long inicio = 0;
 	int pos[][];
 	Button[][] botones;
+	static JuegoNuevo single=null;
+	Intent nuevo ;
+	Intent nuevo2;
+	public static JuegoNuevo instance(){
+		if(single==null)
+			return single=new JuegoNuevo();
+		return single;
+				
+	}
+	public JuegoNuevo(){
+		
+	}
+	
 	
 	
 	TextView timer;
@@ -59,6 +77,8 @@ public class JuegoNuevo extends Activity {
 		minas=tam[2];
 		blancos=filas*columnas - minas;
 		timer = (TextView) findViewById(R.id.tiempo);
+		nuevo=new Intent(this,MainActivity.class);
+		nuevo2 = new Intent(this,JuegoNuevo.class);
 		crearBotones();
 	}
 	
@@ -77,11 +97,13 @@ public class JuegoNuevo extends Activity {
 				pos[i][j]=0;
 				botones[i][j]=new Button(this);
 				TableRow.LayoutParams params = new TableRow.LayoutParams() ;
-				params.width=tam;
-				params.height=tam;
+				//params.width=tam;
+				params.width=TableRow.LayoutParams.WRAP_CONTENT;
+				//params.height=params.width;
+				params.weight=(float)1;
 				params.setMargins(0,0,0,0);
 				
-				botones[i][j].setPadding(1,1,1,1);
+				//botones[i][j].setPadding(1,1,1,1);
 				botones[i][j].setId(generarId(i,j));
 				botones[i][j].setOnTouchListener(new OnTouchListener() {
 					
@@ -119,6 +141,7 @@ public class JuegoNuevo extends Activity {
 				});
 				
 				tablerow.addView(botones[i][j],params);
+				botones[i][j].setHeight(botones[i][j].getWidth());
 			}
 			campo.addView(tablerow);
 		}
@@ -221,6 +244,43 @@ public class JuegoNuevo extends Activity {
 		int n = generarNum(id);
 		if(n == -1){
 			boton.setBackgroundResource(R.drawable.mina);
+			
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					this);
+	 
+				// set title
+				alertDialogBuilder.setTitle("Tu has Perdido!");
+	 
+				// set dialog message
+				alertDialogBuilder
+					.setMessage("Que deseas hacer ahora Losser?")
+					.setCancelable(false)
+					.setNegativeButton("Salir",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+
+							
+							back();
+							dialog.cancel();
+						}
+					})
+					.setPositiveButton("Volver a Jugar",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							
+							
+							DialogFragment dialog2 = new SeleccionNuevoJuego();
+							dialog2.show(getFragmentManager(),"SeleccionNuevoJuego");
+							
+							//JuegoNuevo.instance().startActivity(nuevo2);
+							
+						}
+					  });
+					
+	 
+					// create alert dialog
+					AlertDialog alertDialog = alertDialogBuilder.create();
+	 
+					// show it
+					alertDialog.show();
 		}else if(n==0){
 			contadorBlancos++;
 			extender(id);
@@ -231,6 +291,9 @@ public class JuegoNuevo extends Activity {
 			numColor(boton, n);
 			contadorBlancos++;
 		}
+	}
+	public void back(){
+		super.onBackPressed();
 	}
 	private void extender(int id){
 		int x = generarPosX(id);

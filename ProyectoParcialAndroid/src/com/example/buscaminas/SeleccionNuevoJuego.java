@@ -31,17 +31,17 @@ public class SeleccionNuevoJuego extends DialogFragment{
 					break;
 				}
 				case 1:{
-					tam[0]=16;
-					tam[1]=16;
+					tam[0]=12;
+					tam[1]=12;
 					tam[2]=40;
 					Intent intent = new Intent(getActivity(), JuegoNuevo.class);
 					intent.putExtra(TAMANO, tam);
 					startActivity(intent);
 					break;}
 				case 2:{
-					tam[0]=30;
+					tam[0]=16;
 					tam[1]=16;
-					tam[2]=99;
+					tam[2]=80;
 					Intent intent = new Intent(getActivity(), JuegoNuevo.class);
 					intent.putExtra(TAMANO, tam);
 					startActivity(intent);

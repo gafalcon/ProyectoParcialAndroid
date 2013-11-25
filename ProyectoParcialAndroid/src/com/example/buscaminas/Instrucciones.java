@@ -8,6 +8,6 @@ public class Instrucciones extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.instrucciones);
+		setContentView(R.layout.intrucciones);
 	}
 }
