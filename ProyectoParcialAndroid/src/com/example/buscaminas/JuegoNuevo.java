@@ -5,8 +5,13 @@ import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -34,6 +39,7 @@ public class JuegoNuevo extends Activity {
 	static JuegoNuevo single=null;
 	Intent nuevo ;
 	Intent nuevo2;
+	TableLayout campo;
 	public static JuegoNuevo instance(){
 		if(single==null)
 			return single=new JuegoNuevo();
@@ -85,8 +91,8 @@ public class JuegoNuevo extends Activity {
 	private void crearBotones(){
 
 		
-		TableLayout campo = (TableLayout) findViewById(R.id.campo); 
-		
+		campo = (TableLayout) findViewById(R.id.campo); 
+		campo.setStretchAllColumns(true);
 		//campo.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
 		botones = new Button[filas][columnas];
 		pos = new int[filas][columnas];
@@ -97,6 +103,7 @@ public class JuegoNuevo extends Activity {
 				pos[i][j]=0;
 				botones[i][j]=new Button(this);
 				TableRow.LayoutParams params = new TableRow.LayoutParams() ;
+				
 				//params.width=tam;
 				params.width=TableRow.LayoutParams.WRAP_CONTENT;
 				//params.height=params.width;
@@ -105,6 +112,8 @@ public class JuegoNuevo extends Activity {
 				
 				//botones[i][j].setPadding(1,1,1,1);
 				botones[i][j].setId(generarId(i,j));
+				
+
 				botones[i][j].setOnTouchListener(new OnTouchListener() {
 					
 					@Override
@@ -147,6 +156,7 @@ public class JuegoNuevo extends Activity {
 		}
 
 	}
+	
 	private int generarId(int x,int y){
 		return (x*columnas)+y;
 	}
@@ -237,14 +247,40 @@ public class JuegoNuevo extends Activity {
 			break;
 		}
 	}
+	public static Bitmap drawableToBitmap (Drawable drawable) {
+	    if (drawable instanceof BitmapDrawable) {
+	        return ((BitmapDrawable)drawable).getBitmap();
+	    }
+
+	    Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Config.ARGB_8888);
+	    Canvas canvas = new Canvas(bitmap); 
+	    drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+	    drawable.draw(canvas);
+
+	    return bitmap;
+	}
+	@SuppressWarnings("static-access")
 	private void clickButton(Button boton){
 		boton.setClickable(false);
 		boton.setEnabled(false);
 		int id= boton.getId();
 		int n = generarNum(id);
 		if(n == -1){
-			boton.setBackgroundResource(R.drawable.mina);
-			
+			//Bitmap nuevo = drawableToBitmap (this.getResources().getDrawable(R.drawable.mine));
+			//nuevo.createScaledBitmap(nuevo, boton.getWidth(), boton.getHeight(), false);
+			//boton.setBackgroundDrawable(new BitmapDrawable(boton.getContext().getResources(), nuevo));
+			//boton.
+			Drawable drawa=this.getResources().getDrawable(R.drawable.mine);
+			drawa.setBounds(0,0,boton.getWidth(),boton.getHeight());
+			int width=boton.getWidth();
+			int height=boton.getHeight();
+			campo.setBackgroundResource(R.drawable.background2);
+			System.out.println("TAmano del boton :"+boton.getWidth()+" Tamano del boton alto :"+boton.getHeight());
+			boton.setBackgroundResource(R.drawable.minesweeper);
+			System.out.println("TAmano del boton :"+boton.getWidth()+" Tamano del boton alto :"+boton.getHeight());
+			boton.setHeight(height);
+			boton.setWidth(width);
+			System.out.println("TAmano del boton :"+boton.getWidth()+" Tamano del boton alto :"+boton.getHeight());
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 					this);
 	 

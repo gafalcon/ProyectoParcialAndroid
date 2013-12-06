@@ -30,7 +30,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text="El objetivo del juego es limpiar el campo de minas que aparece en pantalla. Al principio parece una tabla cubierta de azulejos. Cuando se hace clic en, un azulejo desaparece y revela lo que hay debajo. El resultado puede ser un cuadrado en blanco, un cuadrado con un número, o en el peor caso, una mina. Si tienes la mala suerte de descubrir la mina, el juego ha terminado. 
-Hay tres niveles de dificultad en el juego..."
+Hay tres niveles de dificultad en el juego."
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 

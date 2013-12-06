@@ -16,7 +16,7 @@
         <activity
             android:name="com.example.buscaminas.MainActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +25,13 @@
         </activity>
         <activity 
             android:name="com.example.buscaminas.Instrucciones"
-            android:label="Como jugar"
+            android:label="Comojugar"
             android:theme="@android:style/Theme.Dialog"></activity>
         <activity 
             android:name="com.example.buscaminas.JuegoNuevo"
             android:configChanges="orientation|screenSize"
             android:label="JuegoNuevo"
+             android:theme="@android:style/Theme.Black.NoTitleBar" 
             ></activity>
         
     </application>

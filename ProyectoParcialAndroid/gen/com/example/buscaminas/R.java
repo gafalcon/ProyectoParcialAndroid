@@ -21,16 +21,19 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int cara_felizjpg=0x7f020000;
-        public static final int cara_gafas=0x7f020001;
-        public static final int cara_sorpresa=0x7f020002;
-        public static final int glasses_smiley=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int instru=0x7f020005;
-        public static final int mina=0x7f020006;
-        public static final int mine=0x7f020007;
-        public static final int tipo_cara=0x7f020008;
-        public static final int wallpaper=0x7f020009;
+        public static final int background2=0x7f020000;
+        public static final int cara_felizjpg=0x7f020001;
+        public static final int cara_gafas=0x7f020002;
+        public static final int cara_sorpresa=0x7f020003;
+        public static final int glasses_smiley=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int instru=0x7f020006;
+        public static final int mina=0x7f020007;
+        public static final int mine=0x7f020008;
+        public static final int minesweeper=0x7f020009;
+        public static final int noty_36x36=0x7f02000a;
+        public static final int tipo_cara=0x7f02000b;
+        public static final int wallpaper=0x7f02000c;
     }
     public static final class id {
         public static final int action_settings=0x7f08000e;
