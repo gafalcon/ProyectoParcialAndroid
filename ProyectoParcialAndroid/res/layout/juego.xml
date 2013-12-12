@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
-    android:stretchColumns="0,2" >
+    android:stretchColumns="0,3" >
     
     <TableRow >
 
@@ -25,13 +25,26 @@
             android:gravity="center"
             android:scaleType="fitXY"
             android:contentDescription="Cara"
+            android:onClick="clickCara"
             />
+
+		<ImageButton
+		    android:id="@+id/flag"
+		    android:layout_width="48dp"
+		    android:layout_height="48dp"
+		    android:layout_column="2"
+		    android:contentDescription="bandera"
+		    android:gravity="center"
+		    android:onClick="clickBandera"
+		    android:padding="5dp"
+		    android:scaleType="fitXY"
+		    android:src="@drawable/flag_icon" />
 
         <TextView
             android:id="@+id/tiempo"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_column="2"
+            android:layout_column="3"
             android:gravity="center"
             android:text="000"
             android:textColor="@android:color/white"
@@ -39,13 +52,17 @@
 
     </TableRow>
 
-    <TableLayout
-        android:id="@+id/campo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:padding="5dp"
-        android:stretchColumns="*" >
-    </TableLayout>
+	<ScrollView>
+		<TableLayout
+        	android:id="@+id/campo"
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="bottom"
+        	android:padding="5dp"
+        	android:stretchColumns="*" >
+    	</TableLayout>    
+	    
+	</ScrollView>
+
 
 </TableLayout>

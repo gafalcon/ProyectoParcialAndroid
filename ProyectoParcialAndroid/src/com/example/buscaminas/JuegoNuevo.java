@@ -31,11 +31,12 @@ public class JuegoNuevo extends Activity {
 	int columnas,filas, minas,blancos;
 	int contadorBlancos=0;
 	int tam=100;
-	boolean iniciado = false;
+	boolean iniciado = false, setBandera = false,gameover=false;
 	int segundos =0;
 	long inicio = 0;
 	int pos[][];
 	Button[][] botones;
+	ImageButton bandera;
 	static JuegoNuevo single=null;
 	Intent nuevo ;
 	Intent nuevo2;
@@ -52,7 +53,7 @@ public class JuegoNuevo extends Activity {
 	
 	
 	
-	TextView timer;
+	TextView timer,textViewMinas;
 	Handler timerHandler = new Handler();
 	Runnable timerRunnable = new Runnable(){
 
@@ -60,7 +61,8 @@ public class JuegoNuevo extends Activity {
 		public void run() {
 			// TODO Auto-generated method stub
 			long milis = System.currentTimeMillis();
-			segundos++;
+			if(! gameover)
+				segundos++;
 			timer.setText(Integer.toString(segundos));
 			timerHandler.postAtTime(this,milis);
 			
@@ -83,8 +85,11 @@ public class JuegoNuevo extends Activity {
 		minas=tam[2];
 		blancos=filas*columnas - minas;
 		timer = (TextView) findViewById(R.id.tiempo);
+		textViewMinas = (TextView) findViewById(R.id.minas);
+		textViewMinas.setText(Integer.toString(minas));
 		nuevo=new Intent(this,MainActivity.class);
 		nuevo2 = new Intent(this,JuegoNuevo.class);
+		bandera = (ImageButton) findViewById(R.id.flag);
 		crearBotones();
 	}
 	
@@ -122,7 +127,7 @@ public class JuegoNuevo extends Activity {
 						ImageButton cara = (ImageButton) findViewById(R.id.cara);
 						if(event.getAction() == MotionEvent.ACTION_DOWN){
 							cara.setPressed(true);
-						}else if(event.getAction() == MotionEvent.ACTION_UP){
+						}else{ //if(event.getAction() == MotionEvent.ACTION_UP){
 							cara.setPressed(false);
 						}
 						return false;
@@ -139,13 +144,26 @@ public class JuegoNuevo extends Activity {
 							iniciado=true;
 						}
 						Button boton = (Button) arg0;
-						
-						clickButton(boton);
-						if(contadorBlancos==blancos){
-							ImageButton cara = (ImageButton) findViewById(R.id.cara);
-							cara.setBackgroundResource(R.drawable.glasses_smiley);
-						}
-							
+						if(setBandera){
+							if(boton.isFocusable()){
+								boton.setBackgroundResource(R.drawable.flag);
+								boton.setFocusable(false);
+								textViewMinas.setText(Integer.toString(--minas));
+							}else{
+								boton.setBackgroundDrawable(getResources().getDrawable(android.R.drawable.btn_default));
+								boton.setFocusable(true);
+								textViewMinas.setText(Integer.toString(++minas));
+							}
+						}else{
+							if(boton.isFocusable()){
+								clickButton(boton);
+								if(contadorBlancos==blancos){
+									ImageButton cara = (ImageButton) findViewById(R.id.cara);
+									cara.setBackgroundResource(R.drawable.glasses_smiley);
+								
+								}
+							}
+						}	
 					}
 				});
 				
@@ -320,12 +338,19 @@ public class JuegoNuevo extends Activity {
 		}else if(n==0){
 			contadorBlancos++;
 			extender(id);
+			if(blancos==contadorBlancos){
+				gameOver("Felicitaciones!! Has Ganado!!!");
+			}
 			
 		}else{
 			boton.setText(Integer.toString(n));
 			boton.setTypeface(null, Typeface.BOLD);
 			numColor(boton, n);
 			contadorBlancos++;
+			if(blancos==contadorBlancos){
+				gameOver("Felicitaciones!!! Has Ganado!!!");
+			}
+			
 		}
 	}
 	public void back(){
@@ -374,6 +399,60 @@ public class JuegoNuevo extends Activity {
 					clickButton(botones[x+1][y+1]);
 				}
 			}
+		}
+	}
+	private void gameOver(String mensaje){
+		gameover = true;
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+			// set title
+			alertDialogBuilder.setTitle(mensaje);
+ 
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Que deseas hacer ahora??")
+				.setCancelable(false)
+				.setNegativeButton("Salir",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+
+						
+						//back();
+						//dialog.cancel();
+						finish();
+					}
+				})
+				.setPositiveButton("Volver a Jugar",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						
+						
+						DialogFragment dialog2 = new SeleccionNuevoJuego();
+						dialog2.show(getFragmentManager(),"SeleccionNuevoJuego");
+						
+						//JuegoNuevo.instance().startActivity(nuevo2);
+						
+					}
+				  });
+				
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
+	}
+	public void clickCara(View view){
+		DialogFragment dialog2 = new SeleccionNuevoJuego();
+		dialog2.show(getFragmentManager(),"SeleccionNuevoJuego");
+	}
+	public void clickBandera(View view){
+		if(setBandera){
+			setBandera = false;
+			bandera.setBackgroundResource(R.drawable.flag_icon);
+		}else{
+			setBandera = true;
+			bandera.setPressed(true);
+			bandera.setBackgroundResource(R.drawable.flag_icon2);
 		}
 	}
 }
