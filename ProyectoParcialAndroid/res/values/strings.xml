@@ -9,6 +9,8 @@
     <string name="boton_puntuaciones">Puntuaciones</string>
     <string name="boton_instrucciones">Instrucciones</string>
     <string name="boton_salir">Salir</string>
+    <string name="boton_ranking">Ranking</string>
     <string name="instrucciones">Reglas del juego</string>
+    <string name="nombre_usuario">Ingrese su nombre</string>
 
 </resources>

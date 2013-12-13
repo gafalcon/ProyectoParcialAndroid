@@ -14,12 +14,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -311,7 +313,7 @@ public class JuegoNuevo extends Activity {
 				contadorBlancos++;
 				extender(id);
 				if(blancos==contadorBlancos){
-					gameOver("Felicitaciones!! Has Ganado!!!");
+					guardarUsuario();
 				}
 				
 			}else{
@@ -321,7 +323,7 @@ public class JuegoNuevo extends Activity {
 				
 				contadorBlancos++;
 				if(blancos==contadorBlancos){
-					gameOver("Felicitaciones!!! Has Ganado!!!");
+					guardarUsuario();
 				}
 				
 			}
@@ -376,6 +378,35 @@ public class JuegoNuevo extends Activity {
 			}
 		}
 	}
+	
+	private void guardarUsuario(){
+			gameover = true;
+			final DatabaseHandler db = new DatabaseHandler(this);
+			LayoutInflater inflater = this.getLayoutInflater();
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Congratulations!!!");
+			builder.setView(inflater.inflate(R.layout.ingresar_usuario,null))
+					.setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							gameOver("Felicitaciones!!");
+						}
+					})
+					.setPositiveButton("Aceptar",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,int id) {
+							String dificultad = getDificultad();
+							EditText texto = (EditText) findViewById(R.id.nombre_usuario);
+							//String name = texto.getText().toString();
+							String tiempo = Integer.toString(segundos);
+							db.addUsuario(new Ranking("gabriel",tiempo,dificultad));
+							gameOver("Felicitaciones!!");
+						}
+					  });
+			AlertDialog dialog = builder.create();
+			 
+			// show it
+			dialog.show();
+		
+	}
 	private void gameOver(String mensaje){
 		gameover = true;
 		final Intent intent = new Intent(this,MainActivity.class);
@@ -384,7 +415,7 @@ public class JuegoNuevo extends Activity {
  
 			// set title
 			alertDialogBuilder.setTitle(mensaje);
- 
+			
 			// set dialog message
 			alertDialogBuilder
 				.setMessage("Que deseas hacer ahora??")
@@ -446,4 +477,16 @@ public class JuegoNuevo extends Activity {
 		}
 		
 	}
+	public String getDificultad(){
+		if(filas == 8 && columnas == 8)
+			return "principiante";
+		else if(filas == 12 && columnas == 12)
+			return "intermedio";
+		else if(filas == 16 && columnas == 16)
+			return "experto";
+		else
+			return "personalizado";
+		
+	}
+
 }

@@ -36,6 +36,14 @@
             android:layout_marginTop="25dp"
             android:onClick="seleccion"
             android:text="@string/boton_instrucciones" />
+        
+        <Button
+            android:id="@+id/boton_ranking"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClick="seleccion"
+            android:text="@string/boton_ranking" />
 
         <Button
             android:id="@+id/boton_salir"
