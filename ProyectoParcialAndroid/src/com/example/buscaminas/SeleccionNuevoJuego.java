@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class SeleccionNuevoJuego extends DialogFragment{
-	private String arreglo_opciones[] = {"Principiante", "Intermedio","Experto"};
+	private String arreglo_opciones[] = {"Principiante", "Intermedio","Experto","Personalizado"};
 	private int tam[] = new int[3];
 	private String TAMANO = "com.example.Buscaminas";
 	@Override
@@ -28,6 +28,7 @@ public class SeleccionNuevoJuego extends DialogFragment{
 					Intent intent = new Intent(getActivity(), JuegoNuevo.class);
 					intent.putExtra(TAMANO, tam);
 					startActivity(intent);
+					getActivity().finish();
 					break;
 				}
 				case 1:{
@@ -37,6 +38,7 @@ public class SeleccionNuevoJuego extends DialogFragment{
 					Intent intent = new Intent(getActivity(), JuegoNuevo.class);
 					intent.putExtra(TAMANO, tam);
 					startActivity(intent);
+					getActivity().finish();
 					break;}
 				case 2:{
 					tam[0]=16;
@@ -45,8 +47,12 @@ public class SeleccionNuevoJuego extends DialogFragment{
 					Intent intent = new Intent(getActivity(), JuegoNuevo.class);
 					intent.putExtra(TAMANO, tam);
 					startActivity(intent);
+					getActivity().finish();
 					break;}
-				
+				case 3:
+                    DialogFragment dialogo = new Personalizado();
+                    dialogo.show(getFragmentManager(),"Personalizar");
+                    break;
 
 				default:
 					break;

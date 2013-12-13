@@ -2,49 +2,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
-    android:stretchColumns="0,3" >
-    
-    <TableRow >
+     >
+
+    <TableRow>
 
         <TextView
             android:id="@+id/minas"
-            android:layout_width="match_parent"
+            android:layout_width="110dp"
             android:layout_height="48dp"
             android:layout_column="0"
             android:gravity="center"
             android:text="99"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
-        
-        <ImageButton android:id="@+id/cara"
-            android:layout_column="1"
-            android:layout_height="48dp"
-            android:layout_width="48dp"
-            android:src="@drawable/tipo_cara"
-            android:padding="5dp"
-            android:gravity="center"
-            android:scaleType="fitXY"
-            android:contentDescription="Cara"
-            android:onClick="clickCara"
-            />
 
-		<ImageButton
-		    android:id="@+id/flag"
-		    android:layout_width="48dp"
-		    android:layout_height="48dp"
-		    android:layout_column="2"
-		    android:contentDescription="bandera"
-		    android:gravity="center"
-		    android:onClick="clickBandera"
-		    android:padding="5dp"
-		    android:scaleType="fitXY"
-		    android:src="@drawable/flag_icon" />
+        <ImageButton
+            android:id="@+id/cara"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_column="1"
+            android:contentDescription="Cara"
+            android:gravity="center"
+            android:onClick="clickCara"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/tipo_cara" />
+
+        <ImageButton
+            android:id="@+id/flag"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_column="2"
+            android:contentDescription="bandera"
+            android:gravity="center"
+            android:onClick="clickBandera"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/flag_icon" />
 
         <TextView
             android:id="@+id/tiempo"
-            android:layout_width="match_parent"
+            android:layout_width="110dp"
             android:layout_height="48dp"
-            android:layout_column="3"
             android:gravity="center"
             android:text="000"
             android:textColor="@android:color/white"
@@ -52,17 +51,34 @@
 
     </TableRow>
 
-	<ScrollView>
-		<TableLayout
-        	android:id="@+id/campo"
-        	android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:gravity="bottom"
-        	android:padding="5dp"
-        	android:stretchColumns="*" >
-    	</TableLayout>    
-	    
-	</ScrollView>
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scrollvie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.94"
+        android:scrollbars="horizontal" >
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TableLayout
+                    android:id="@+id/campo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#E6E6E6"
+                    android:gravity="bottom"
+                    android:padding="5dp"
+                    android:stretchColumns="*" >
+                </TableLayout>
+            </LinearLayout>
+        </ScrollView>
+    </HorizontalScrollView>
 
 </TableLayout>
