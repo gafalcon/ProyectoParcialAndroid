@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
-	private String SELECCIONAR = "com.example.Buscaminas";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -32,13 +32,12 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.boton_instrucciones:
 			Intent intent = new Intent(this,Instrucciones.class);
-			intent.putExtra(SELECCIONAR, 1);
 			startActivity(intent);
 			break;
 		case R.id.boton_ranking:{
-			Intent intent1 = new Intent(this,Instrucciones.class);
-			intent1.putExtra(SELECCIONAR, 2);
+			Intent intent1 = new Intent(this,ListaUsuarios.class);
 			startActivity(intent1);
+			break;
 		}
 		default:
 			break;

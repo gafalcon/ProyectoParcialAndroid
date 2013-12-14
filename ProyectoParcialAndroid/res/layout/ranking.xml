@@ -22,15 +22,17 @@
         android:textStyle="bold"
         android:typeface="normal" />
 
-    <TextView
+		<TextView
         android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="top|left"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:text=""
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp" />    
+
+    
 
 </LinearLayout>

@@ -11,17 +11,32 @@ public class ListaUsuarios extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.intrucciones);
-		//DatabaseHandler db = new DatabaseHandler(this);
+		setContentView(R.layout.ranking);
+		DatabaseHandler db = new DatabaseHandler(this);
 		
-		//TextView text = (TextView) findViewById(R.id.lista);
-		//List<Ranking> rankings = db.getAllUsers();       
-        //String log = "";
-        /*for (Ranking cn : rankings) {
-            log += "Id: "+cn.getID()+" ,Nombre: " + cn.getNombre() + " ,Tiempo: " + cn.getTiempo()+"\n";
+		TextView text = (TextView) findViewById(R.id.lista);
+		List<Ranking> rankings = db.getAllUsers("principiante");       
+        String log = "\tPrincipiante\n\n";
+        for (Ranking cn : rankings) {
+            log += "\tNombre: " + cn.getNombre() + " ,Tiempo: " + cn.getTiempo()+"\n";
+        }
+        rankings = db.getAllUsers("intermedio");       
+        log += "\n\tIntermedio\n\n";
+        for (Ranking cn : rankings) {
+            log += "\tNombre: " + cn.getNombre() + " ,Tiempo: " + cn.getTiempo()+"\n";
+        }
+        rankings = db.getAllUsers("experto");       
+        log += "\n\tExperto\n\n";
+        for (Ranking cn : rankings) {
+            log += "\tNombre: " + cn.getNombre() + " ,Tiempo: " + cn.getTiempo()+"\n";
+        }
+        rankings = db.getAllUsers("personalizado");       
+        log += "\n\tPersonalizado\n\n";
+        for (Ranking cn : rankings) {
+            log += "\tNombre: " + cn.getNombre() + " ,Tiempo: " + cn.getTiempo()+"\n";
         }
         text.setText(log);
-         */   
+        
     }
 
 }

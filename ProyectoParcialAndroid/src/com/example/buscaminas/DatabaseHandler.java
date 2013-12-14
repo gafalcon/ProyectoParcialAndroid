@@ -55,10 +55,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		return ranking;
 	}
 	
-	public List<Ranking> getAllUsers() {
+	public List<Ranking> getAllUsers(String dif) {
 	    List<Ranking> listaUsuarios = new ArrayList<Ranking>();
 	    // Select All Query
-	    String selectQuery = "SELECT  * FROM " + TABLE_USUARIOS+" ORDER BY tiempo";
+	    String selectQuery = "SELECT  * FROM " + TABLE_USUARIOS+" WHERE dificultad='"+ dif +"' ORDER BY dificultad,tiempo";
 	 
 	    SQLiteDatabase db = this.getWritableDatabase();
 	    Cursor cursor = db.rawQuery(selectQuery, null);

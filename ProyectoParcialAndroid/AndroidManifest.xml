@@ -25,7 +25,11 @@
         </activity>
         <activity 
             android:name="com.example.buscaminas.Instrucciones"
-            android:label="Comojugar"
+            android:label="Como jugar"
+            android:theme="@android:style/Theme.Dialog"></activity>
+        <activity 
+            android:name="com.example.buscaminas.ListaUsuarios"
+            android:label="Ranking"
             android:theme="@android:style/Theme.Dialog"></activity>
         <activity 
             android:name="com.example.buscaminas.JuegoNuevo"

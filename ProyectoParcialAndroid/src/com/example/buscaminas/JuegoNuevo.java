@@ -3,6 +3,7 @@ package com.example.buscaminas;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -383,9 +385,13 @@ public class JuegoNuevo extends Activity {
 			gameover = true;
 			final DatabaseHandler db = new DatabaseHandler(this);
 			LayoutInflater inflater = this.getLayoutInflater();
+			final EditText edit = new EditText(this);
+			edit.setWidth(50);
+			edit.setText("");
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Congratulations!!!");
-			builder.setView(inflater.inflate(R.layout.ingresar_usuario,null))
+			//builder.setView(inflater.inflate(R.layout.ingresar_usuario,null))
+			builder.setTitle("Has ganado!!! Ingresa tu nombre:");
+			builder.setView(edit)
 					.setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,int id) {
 							gameOver("Felicitaciones!!");
@@ -394,10 +400,16 @@ public class JuegoNuevo extends Activity {
 					.setPositiveButton("Aceptar",new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog,int id) {
 							String dificultad = getDificultad();
-							EditText texto = (EditText) findViewById(R.id.nombre_usuario);
-							//String name = texto.getText().toString();
+							String name = edit.getText().toString();
 							String tiempo = Integer.toString(segundos);
-							db.addUsuario(new Ranking("gabriel",tiempo,dificultad));
+							if(name != ""){
+								db.addUsuario(new Ranking(name,tiempo,dificultad));
+								Context context = getApplicationContext();
+								CharSequence text = "puntuacion guardada!";
+								int duration = Toast.LENGTH_SHORT;
+								Toast toast = Toast.makeText(context, text, duration);
+								toast.show();
+							}
 							gameOver("Felicitaciones!!");
 						}
 					  });
