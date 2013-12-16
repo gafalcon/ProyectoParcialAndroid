@@ -1,6 +1,11 @@
 package com.example.buscaminas;
 
 
+/**
+ * Clase que crea elementos para la base de datos Ranking
+ * @author gabo
+ *
+ */
 public final class Ranking {
 	int _id;
 	String _nombre;

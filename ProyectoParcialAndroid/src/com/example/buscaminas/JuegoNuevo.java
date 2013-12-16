@@ -10,21 +10,17 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -33,6 +29,12 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+
+/**
+ * Actividad que desarrolla la pantalla de juego y todas las funciones de jugabilidad
+ * @author gabo
+ *
+ */
 public class JuegoNuevo extends Activity {
 	public static final String TAMANO = "com.example.Buscaminas";
 	int columnas,filas, minas,blancos;
@@ -48,6 +50,11 @@ public class JuegoNuevo extends Activity {
 	Intent nuevo ;
 	Intent nuevo2;
 	TableLayout campo;
+	
+	/**
+	 * Crea nueva instancia de JuegoNuevo
+	 * @return instancia JuegoNuevo
+	 */
 	public static JuegoNuevo instance(){
 		if(single==null)
 			return single=new JuegoNuevo();
@@ -78,10 +85,19 @@ public class JuegoNuevo extends Activity {
 		
 	};
 	
+	/**
+	 * Inicia el timer
+	 */
 	public void IniciarContador(){
 		timerHandler.removeCallbacks(timerRunnable);
 		timerHandler.postDelayed(timerRunnable, 1000);
 	}
+	
+	/**
+	 * Asigna el layout juego.xml a la actividad e inicializa variables
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * @see #crearBotones()
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -100,6 +116,10 @@ public class JuegoNuevo extends Activity {
 		crearBotones();
 	}
 	
+	
+	/**
+	 * Crea todos los botones del campo de acuerdo a dificultad
+	 */
 	private void crearBotones(){
 
 		
@@ -128,6 +148,10 @@ public class JuegoNuevo extends Activity {
 
 				botones[i][j].setOnTouchListener(new OnTouchListener() {
 					
+					/**
+					 * Genera las animaciones de la cara feliz
+					 * @see android.view.View.OnTouchListener#onTouch(android.view.View, android.view.MotionEvent)
+					 */
 					@Override
 					public boolean onTouch(View arg0, MotionEvent event) {
 						// TODO Auto-generated method stub
@@ -142,6 +166,10 @@ public class JuegoNuevo extends Activity {
 				});
 				botones[i][j].setOnClickListener(new OnClickListener() {
 					
+					/**
+					 * Desarrolla el juego de acuerdo al contenido del boton presionado
+					 * @see android.view.View.OnClickListener#onClick(android.view.View)
+					 */
 					@Override
 					public void onClick(View arg0) {
 						// TODO Auto-generated method stub
@@ -188,15 +216,35 @@ public class JuegoNuevo extends Activity {
 
 	}
 	
+	/**
+	 * @param x la columna de la tabla de Minas
+	 * @param y la fila de la tabla Minas
+	 * @return id del boton deseado
+	 */
 	private int generarId(int x,int y){
 		return (x*columnas)+y;
 	}
+	/**
+	 * @param id del boton
+	 * @return el num de columna del boton deseado
+	 */
 	private int generarPosX(int id){
 		return id/columnas;
 	}
+	
+	/**
+	 * @param id del boton
+	 * @return el num de fila del boton deseado
+	 */
 	private int generarPosY(int id){
 		return id%columnas;
 	}
+	
+	/**
+	 * Genera el campo de minas aleatoriamente
+	 * @param id del primer boton presionado para asegurarse que no tenga mina
+	 * 
+	 */
 	private void generarTablaMinas(int id){
 		int x = generarPosX(id);
 		int y = generarPosY(id);
@@ -213,6 +261,12 @@ public class JuegoNuevo extends Activity {
 			}
 		}
 	}
+	
+	/**
+	 * @param id del boton presionado
+	 * @return el numero del boton de acuerdo a cuantas minas haiga alrededor
+	 * -1 si el boton contiene mina
+	 */
 	private int generarNum(int id){
 		int contador=0;
 		int x1 = generarPosX(id);
@@ -256,6 +310,11 @@ public class JuegoNuevo extends Activity {
 			return -1;
 		}
 	}
+	
+	/**
+	 * @param n el numero del boton
+	 * @return la imagen del numero para colocar en el boton
+	 */
 	private int numImage(int n){
 		switch (n) {
 		case 1:
@@ -277,6 +336,7 @@ public class JuegoNuevo extends Activity {
 			return R.drawable.ocho;
 		}
 	}
+	
 	public static Bitmap drawableToBitmap (Drawable drawable) {
 	    if (drawable instanceof BitmapDrawable) {
 	        return ((BitmapDrawable)drawable).getBitmap();
@@ -289,6 +349,11 @@ public class JuegoNuevo extends Activity {
 
 	    return bitmap;
 	}
+	
+	/**
+	 * Desarrolla las funciones que ocurren al presionar un boton
+	 * @param boton presionado
+	 */
 	private void clickButton(ImageButton boton){
 		if(boton.isFocusable()){
 			boton.setClickable(false);
@@ -296,13 +361,6 @@ public class JuegoNuevo extends Activity {
 			int id= boton.getId();
 			int n = generarNum(id);
 			if(n == -1){
-				//Bitmap nuevo = drawableToBitmap (this.getResources().getDrawable(R.drawable.mine));
-				//nuevo.createScaledBitmap(nuevo, boton.getWidth(), boton.getHeight(), false);
-				//boton.setBackgroundDrawable(new BitmapDrawable(boton.getContext().getResources(), nuevo));
-				//boton
-
-				//campo.setBackgroundResource(R.drawable.background2);
-				
 				MostrarMinas(boton);
 				boton.setImageResource(0);
 				
@@ -335,6 +393,10 @@ public class JuegoNuevo extends Activity {
 	public void back(){
 		super.onBackPressed();
 	}
+	/**
+	 * Descubre dinamicamente botones que no tengan minas ni numeros
+	 * @param id del boton presionado
+	 */
 	private void extender(int id){
 		int x = generarPosX(id);
 		int y = generarPosY(id);
@@ -381,10 +443,12 @@ public class JuegoNuevo extends Activity {
 		}
 	}
 	
+	/**
+	 * Guarda el usuario dentro de la base de datos
+	 */
 	private void guardarUsuario(){
 			gameover = true;
 			final DatabaseHandler db = new DatabaseHandler(this);
-			LayoutInflater inflater = this.getLayoutInflater();
 			final EditText edit = new EditText(this);
 			edit.setWidth(50);
 			edit.setText("");
@@ -419,6 +483,11 @@ public class JuegoNuevo extends Activity {
 			dialog.show();
 		
 	}
+	
+	/**
+	 * Muestra mensaje al terminar el juego
+	 * @param mensaje a mostrar
+	 */
 	private void gameOver(String mensaje){
 		gameover = true;
 		final Intent intent = new Intent(this,MainActivity.class);
@@ -462,12 +531,22 @@ public class JuegoNuevo extends Activity {
 				// show it
 				alertDialog.show();
 	}
+	
+	/**
+	 * onClickHandler del boton Cara
+	 * @param view el boton cara
+	 */
 	public void clickCara(View view){
 		
 		DialogFragment dialog2 = new SeleccionNuevoJuego();
 		dialog2.show(getFragmentManager(),"SeleccionNuevoJuego");
 		
 	}
+	
+	/**
+	 * onClickHandler funcionalidad del boton Bandera
+	 * @param view el boton bandera
+	 */
 	public void clickBandera(View view){
 		if(setBandera){
 			setBandera = false;
@@ -478,6 +557,11 @@ public class JuegoNuevo extends Activity {
 			bandera.setBackgroundResource(R.drawable.flag_icon2);
 		}
 	}
+	
+	/**
+	 * Descubre todas las minas del campo al perder el juego
+	 * @param boton presionado muestra mina de color rojo
+	 */
 	private void MostrarMinas(ImageButton boton){
 		for(int i=0; i<filas; i++){
 			for(int j=0; j<columnas;j++){
@@ -489,6 +573,11 @@ public class JuegoNuevo extends Activity {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @return String dificultad del juego
+	 */
 	public String getDificultad(){
 		if(filas == 8 && columnas == 8)
 			return "principiante";

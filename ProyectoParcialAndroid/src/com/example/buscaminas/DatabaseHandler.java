@@ -9,6 +9,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Clase que maneja los queries de la base de datos
+ * @author gabo
+ *
+ */
 public class DatabaseHandler extends SQLiteOpenHelper{
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "ranking";
@@ -18,10 +23,19 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	private static final String KEY_TIEMPO = "tiempo";
 	private static final String KEY_DIF = "dificultad";
 	
+	/**
+	 * Constructor de DatabaseHandler
+	 * @param context
+	 */
 	public DatabaseHandler(Context context){
 		super(context, DATABASE_NAME,null,DATABASE_VERSION);
 	}
 	
+	/** 
+	 * Crea la tabla Usuarios con los valores
+	 * id, nombre, tiempo y dificultad
+	 * @see android.database.sqlite.SQLiteOpenHelper#onCreate(android.database.sqlite.SQLiteDatabase)
+	 */
 	public void onCreate(SQLiteDatabase db){
 		String CREATE_RANKING_TABLE = "CREATE TABLE "+TABLE_USUARIOS +" (" 
 	+ KEY_ID +" INTEGER PRIMARY KEY, " + KEY_NOMBRE+" TEXT, "
@@ -29,11 +43,19 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		db.execSQL(CREATE_RANKING_TABLE);
 	}
 	
+	/**
+	 * Actualiza elementos de la base de Datos
+	 * @see android.database.sqlite.SQLiteOpenHelper#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)
+	 */
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion ){
 		db.execSQL("DROP TABLE IF EXISTS "+TABLE_USUARIOS);
 		onCreate(db);
 	}
 	
+	/**
+	 * Añade usuario a la base de datos
+	 * @param ranking el usuario a ingresar
+	 */
 	public void addUsuario(Ranking ranking){
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -45,6 +67,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		db.close();
 	}
 	
+	/**
+	 * @param id de un usuario
+	 * @return un elemento de la base de datos
+	 */
 	public Ranking getRanking(int id){
 		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.query(TABLE_USUARIOS, new String[] {KEY_ID,
@@ -55,6 +81,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		return ranking;
 	}
 	
+	/**
+	 * @param dif nivel de dificultad
+	 * @return lista de Usuarios de acuerdo a la dificultad
+	 */
 	public List<Ranking> getAllUsers(String dif) {
 	    List<Ranking> listaUsuarios = new ArrayList<Ranking>();
 	    // Select All Query

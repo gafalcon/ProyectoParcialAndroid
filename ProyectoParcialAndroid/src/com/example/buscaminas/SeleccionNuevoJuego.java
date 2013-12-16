@@ -7,6 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+/**
+ * Dialogo que muestra las opciones de dificultad
+ * @author gabo
+ *
+ */
 public class SeleccionNuevoJuego extends DialogFragment{
 	private String arreglo_opciones[] = {"Principiante", "Intermedio","Experto","Personalizado"};
 	private int tam[] = new int[3];

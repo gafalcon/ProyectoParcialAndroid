@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.NumberPicker;
 
+/**
+ * Clase que muestra el dialogo para escoger las opciones del boton personalizado
+ * @author gabo
+ *
+ */
 public class Personalizado extends DialogFragment{
 	
 	public Dialog onCreateDialog(Bundle savedInstanceState){

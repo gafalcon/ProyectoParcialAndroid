@@ -6,8 +6,18 @@ import android.app.Activity;
 import java.util.List;
 import android.widget.TextView;
 
-
+/**
+ * Actividad que muestra la lista de Ganadores del juego
+ * @author gabo
+ *
+ */
 public class ListaUsuarios extends Activity {
+	
+	/**
+	 * Asigna el layout ranking.xml a la actividad
+	 * Genera la lista de ganadores recuperandolos de la base de datos
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
